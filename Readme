@@ -1,0 +1,2 @@
+Compilation
+c++ -o blockhash blockhash.cpp `Magick++-config --cppflags --cxxflags --ldflags --libs` -lm

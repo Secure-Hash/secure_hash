@@ -181,7 +181,6 @@ int Blockhash::process_image(char * fn, int bits, int quick, int debug)
 {
     int i, j;
     size_t width, height;
-    //unsigned char *image_data;
     int *hash;
     Image image;
     image.read(fn);
@@ -191,16 +190,32 @@ int Blockhash::process_image(char * fn, int bits, int quick, int debug)
 	
 	width = image.size().width();
 	height = image.size().height();
-    //image_data = (unsigned char *)malloc(width * height * 4);
-	//@TODO
-	Quantum *pixel_cache = image.getPixels(0,0,width,height);
 
+	cout<<height<<endl;
+	cout<<width<<endl;
+
+	//@TODO
+	Quantum *pixel_cache = image.getPixels(0,0,5,5);
+
+	for(i = 0; i < 5; i++){
+		for(j = 0; j < 5; j++){
+			cout<<*pixel_cache<<"  ";
+			pixel_cache++;
+			cout<<*pixel_cache<<"  ";
+			pixel_cache++;
+			cout<<*pixel_cache<<"  ";
+			pixel_cache++;
+			}
+			cout<<endl;
+		}
+
+	/*
     hash = (int *)malloc(bits * bits * sizeof(int));
 
     if (quick) {
-        blockhash_quick(bits, image_data, width, height, &hash);
+        blockhash_quick(bits, (unsigned char *)pixel_cache, width, height, &hash);
     } else {
-        blockhash(bits, image_data, width, height, &hash);
+        blockhash(bits, (unsigned char *)pixel_cache, width, height, &hash);
     }
 
     if (debug) {
@@ -217,7 +232,7 @@ int Blockhash::process_image(char * fn, int bits, int quick, int debug)
 
     free(hex);
     free(hash);
-    free(image_data);
+    free(pixel_cache); */
 }
 
 /** Compare medians across four horizontal bands
